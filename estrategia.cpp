@@ -80,8 +80,8 @@ void estrategia_update() {
       if (dist_min >= DIST_DETEC) { _entrar(ESTADO_BUSCAR);  break; }
       if (dist_min <  DIST_ATAQUE){ _entrar(ESTADO_ATACAR);  break; }
 
-      if      (mais_esq) mover(VEL_PERSEGUIR / 2, VEL_PERSEGUIR);
-      else if (mais_dir) mover(VEL_PERSEGUIR, VEL_PERSEGUIR / 2);
+      if      (mais_esq) mover(VEL_PERSEGUIR, -VEL_PERSEGUIR);
+      else if (mais_dir) mover(-VEL_PERSEGUIR, VEL_PERSEGUIR);
       else               frente(VEL_PERSEGUIR);
       break;
     }

@@ -28,12 +28,12 @@ static void _aplicar(uint8_t pino_pwm,
   velocidade = constrain(velocidade, -255, 255);
  
   if (velocidade > 0) {
-    digitalWrite(pino_in1, HIGH);
-    digitalWrite(pino_in2, LOW);
-    analogWrite(pino_pwm, velocidade);
-  } else if (velocidade < 0) {
     digitalWrite(pino_in1, LOW);
     digitalWrite(pino_in2, HIGH);
+    analogWrite(pino_pwm, velocidade);
+  } else if (velocidade < 0) {
+    digitalWrite(pino_in1, HIGH);
+    digitalWrite(pino_in2, LOW);
     analogWrite(pino_pwm, -velocidade);
   } else {
     // freio ativo

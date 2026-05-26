@@ -9,7 +9,7 @@
 
 static VL53L0X SOF;
 static VL53L0X SOE;
-static VL53L0X SOD;
+//static VL53L0X SOD;
 
 static LeituraSO     _cache     = {9999, 9999, 9999, false, false, false};
 static unsigned long _ultimo_SO = 0;
@@ -30,10 +30,10 @@ static bool _init_vl53(VL53L0X& sensor, uint8_t pino_xshut, uint8_t novo_enderec
 bool SO_init() {
   pinMode(PINO_SOF, OUTPUT);
   pinMode(PINO_SOE, OUTPUT);
-  pinMode(PINO_SOD, OUTPUT);
+  //pinMode(PINO_SOD, OUTPUT);
   digitalWrite(PINO_SOF, LOW);
   digitalWrite(PINO_SOE, LOW);
-  digitalWrite(PINO_SOD, LOW);
+  // digitalWrite(PINO_SOD, LOW);
   delay(20);
 
   Wire.begin();
@@ -41,7 +41,7 @@ bool SO_init() {
   bool check = true;
   check &= _init_vl53(SOF, PINO_SOF, END_SOF);
   check &= _init_vl53(SOE, PINO_SOE, END_SOE);
-  check &= _init_vl53(SOD, PINO_SOD, END_SOD);
+  // check &= _init_vl53(SOD, PINO_SOD, END_SOD);
 
   return check;
 }
@@ -60,9 +60,9 @@ LeituraSO ler_SO() {
   _cache.check_esquerda = !SOE.timeoutOccurred();
   _cache.dist_esquerda  = _cache.check_esquerda ? v : 9999;
 
-  v = SOD.readRangeContinuousMillimeters();
-  _cache.check_direita  = !SOD.timeoutOccurred();
-  _cache.dist_direita   = _cache.check_direita  ? v : 9999;
+  // v = SOD.readRangeContinuousMillimeters();
+  // _cache.check_direita  = !SOD.timeoutOccurred();
+  // _cache.dist_direita   = _cache.check_direita  ? v : 9999;
 
   // --- Serial ---
   Serial.print("[SO] F:");
@@ -70,8 +70,8 @@ LeituraSO ler_SO() {
   Serial.print("  E:");
   Serial.print(_cache.check_esquerda ? String(_cache.dist_esquerda) + "mm" : "ERR");
   Serial.print("  D:");
-  Serial.print(_cache.check_direita  ? String(_cache.dist_direita)  + "mm" : "ERR");
-  Serial.print("  ");
+  // Serial.print(_cache.check_direita  ? String(_cache.dist_direita)  + "mm" : "ERR");
+  // Serial.print("  ");
 
   return _cache;
 }
